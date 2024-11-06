@@ -19,3 +19,77 @@ body {
     height: 100vh;
     margin: 0 auto;
 }
+
+.toasts-container {
+    position: fixed;
+    top: 20px;
+    right: 20px;
+    z-index: 1000;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.toast {
+    position: relative;
+    min-width: 200px;
+    min-height: 40px;
+    padding: 15px;
+    background-color: rgba(50, 50, 50, 0.9);
+    color: #fff;
+    border-radius: 5px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    opacity: 0;
+    transform: translateX(100%);
+    transition: opacity 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275),
+                transform 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275),
+                scale 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275),
+                border-radius 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+    cursor: pointer;
+    overflow: hidden;
+}
+
+.toast:active {
+    scale: 0.9;
+}
+
+.toast:active::before {
+    transform: scale(4);
+    transition: transform 0.2s cubic-bezier(0.215, 0.610, 0.355, 1);
+}
+
+.toast:hover {
+    border-radius: 8px;
+}
+
+.toast:hover::before {
+    left: 0%;
+    opacity: 1;
+    scale: 1;
+}
+
+.toast::before {
+    content: 'READ';
+    position: absolute;
+    left: 100%;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(200, 40, 187, 1);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    opacity: 0;
+    /*scale: 0.5;*/
+    transition: left 0.2s cubic-bezier(0.215, 0.610, 0.355, 1),
+                opacity 0.2s cubic-bezier(0.215, 0.610, 0.355, 1);
+                /*scale 0.3s cubic-bezier(0.215, 0.610, 0.355, 1);*/
+    font-weight: 700;
+}
+
+.toast.show {
+    opacity: 1;
+    transform: translateX(0);
+}
